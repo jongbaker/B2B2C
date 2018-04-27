@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>第二种内置服务</title>
+    <script src="js/angular.min.js"></script>
+    <script>
+        /*定义模块*/
+        var app = angular.module('myapp',[])
+        /*定义控制器*/
+        app.controller('mycontroller',function($scope,$http){
+            $scope.find= function () {
+                $http.get('data.json').success(
+                        function(response){
+                            $scope.list = response;
+                        }
+                )
+            }
+
+
+        })
+    </script>
+</head>
+<!--必须指定-->
+<body ng-app="myapp" ng-controller="mycontroller"  ng-init="find()">
+<table>
+    <tr>
+        <td>name</td>
+        <td>shuxue</td>
+        <td>yuwen</td>
+    </tr>
+    <tr ng-repeat="num in list">
+        <td>{{num.name}}</td>
+        <td>{{num.shuxue}}</td>
+        <td>{{num.yuwen}}</td>
+    </tr>
+</table>
+</html>
